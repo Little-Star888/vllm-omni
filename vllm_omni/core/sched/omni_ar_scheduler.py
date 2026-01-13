@@ -151,11 +151,10 @@ class OmniARScheduler(VLLMScheduler):
             if new_token_ids:
                 new_token_ids, stopped = self._update_request_with_output(request, new_token_ids)
 
-            # Stop checking for pooler models.
             if pooler_output:
                 # Note: As we occupied the pooler output, for multimodal outputs, we do not intermediate stop checking for pooler output
                 if request.output_token_ids:
-                    stopped = check_stop(request, self.max_model_len, pooler_output)
+                    stopped = check_stop(request, self.max_model_len)
             routed_experts = None
             if stopped:
                 if self.vllm_config.model_config.enable_return_routed_experts:
