@@ -1,5 +1,7 @@
-import base64
 import os
+os.environ["VLLM_WORKER_MULTIPROC_METHOD"] = "spawn"
+
+import base64
 import socket
 import subprocess
 import sys
